@@ -206,7 +206,7 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 			if(itemAt(i).equals(item))
 				counter++;
 		}
-		return -1;
+		return counter;
     }
 
 	/** Reset the SequenceInterface to empty status by reinitializing the variables
