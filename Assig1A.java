@@ -13,7 +13,7 @@
  *  give any differences.
  */
 public class Assig1A
-{
+{ //ArrayDS implements boht the interfaces --> copy and paste all the methods for the interfaces 
 	private static final int SIZE = 5;
 	private static final int SIZE2 = 10;
 	private static final int LARGE_SIZE = 100000;
@@ -34,19 +34,19 @@ public class Assig1A
 			System.out.println(newItem + " appended to sequence");
 		}
 
-		System.out.println(s1);
-		//Testing clear
-		s1.clear();
-		int sz = s1.size();
+ 		System.out.println(s1);
+ 		//Testing clear
+ 		s1.clear();
+ 		int sz = s1.size();
 		System.out.println(sz + " item(s) in the sequence.");
 
-		// Testing prefix
-		for (int i = 0; i < SIZE; i++)
-		{
-			Integer newItem = 2 * i;
-			s1.prefix(newItem);
-			System.out.println(newItem + " prefixed to sequence");
-		}
+// 		// Testing prefix
+ 		for (int i = 0; i < SIZE; i++)
+ 		{
+ 			Integer newItem = 2 * i;
+ 			s1.prefix(newItem);
+ 			System.out.println(newItem + " prefixed to sequence");
+ 		}
 
 		System.out.println(s1);
 
@@ -64,7 +64,7 @@ public class Assig1A
 
 		System.out.println(theS);
 
-		// Testing deleteHead
+ 		// Testing deleteHead
 		while (!(theS.isEmpty()))
 		{
 			Integer oldItem = theS.deleteHead();
@@ -76,7 +76,7 @@ public class Assig1A
 			System.out.println("Nothing in the sequence");
 		}
 
-		// Testing deleteTail
+ 		// Testing deleteTail
 		while (!(s1.isEmpty()))
 		{
 			Integer oldItem = s1.deleteTail();
@@ -88,7 +88,7 @@ public class Assig1A
 			System.out.println("Nothing in the sequence");
 		}
 
-		// Testing array management
+// 		// Testing array management
 		String[] alphabet = new String[SIZE2];
 		for(int i=0; i<SIZE2; i++){
 			alphabet[i] = new String("Item " + i);
@@ -136,7 +136,7 @@ public class Assig1A
 		char char1 = 'r';
 		char char2 = 'u';
 		System.out.println("The letter " + char1 + " is a predecessor of " + char2 + ": " + sentence.predecessor(char1, char2));
-	  char1 = 'r';
+	    char1 = 'r';
 		char2 = 't';
 		System.out.println("The letter " + char1 + " is a predecessor of " + char2 + ": " + sentence.predecessor(char1, char2));
 
@@ -192,5 +192,5 @@ public class Assig1A
 		}
 		//System.out.println(largeNumber);
 		System.out.println("The size of the sequence is " + largeNumber.size());
-}
+ }
 }

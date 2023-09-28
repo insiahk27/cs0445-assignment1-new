@@ -4,7 +4,7 @@
  *  to work, you must complete the implementation of the ArrayDS class. See additional comments below.
  */
 
-public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<ReallyLongInt>
+ public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<ReallyLongInt> 
 {
 	// Instance variables are inherited.  You may not add any new instance variables
 	private static final Integer[] DIGITS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -58,21 +58,55 @@ public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<Really
 
 	// You must implement the methods below.  See the descriptions in the
 	// assignment sheet
+	// prefix zeros until its the same size (compare the lengths)
+	// digits sum
+	// remainder = 12-10 = 
+	//this.itemAt(first) + rightOp.itemAt(second) + remainder
+	// append to teh new ReallyLongInt
+	// if remainder at end, append again
 
 	public ReallyLongInt add(ReallyLongInt rightOp) {
+		// int maxSize = Math.max(rightOp.size(), this.size());
+		// ReallyLongInt temp = new ReallyLongInt(maxSize); 
+
+		// if(rightOp.size)
+		
+
+		// int remainder = 0;
+		// int digitSums = 0;
+		// // if()
+		// int remainder = 0;
+		// int digitSums = 0;
+		// for(int i=rightOp.size()-1; i>=0; i--){
+		// 	remainder = 0;
+		// 	if(this.itemAt(i) + rightOp.itemAt(i)>=10){
+		// 		remainder = 1;
+		// 		temp.append(this.itemAt(i) + rightOp.itemAt(i) - 10);
+		// 	}
+		// 	else {
+		// 		temp.append(this.itemAt(i) + rightOp.itemAt(i) + remainder);
+		// 		remainder = 0;
+		// 	}
+		// }
+		// if(remainder==1)
+		// 	temp.append(1);
+		// reverse();
+		// return temp;
 		return null;
 	}
 
-
+	// substracting this for the second parameter (this-rightOp) = this object is being decreased as well
 	public ReallyLongInt subtract(ReallyLongInt rightOp){
 		return null;
 	}
 
+	// first-second (should not be changing this) - actually a very good candidate for a static metgid
 	public ReallyLongInt subtract(ReallyLongInt first, ReallyLongInt second){
 		return null;
 	}
-
+// for loop to go through each item --> check individual sequeunce and when one is greater than the other boolean becomes false
 	public int compareTo(ReallyLongInt rOp){
+
 		return 0;
 	}
 
@@ -80,10 +114,12 @@ public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<Really
 		return false;
 	}
 
+	// add zeros o the end
 	public ReallyLongInt multTenToThe(int num){
 		return null;
 	}
 
+	// divide
 	public ReallyLongInt divTenToThe(int num){
 		return null;
 	}
