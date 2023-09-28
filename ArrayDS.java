@@ -202,11 +202,13 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	 */
 	 // have a similar loop as in toString
 	public int getFrequencyOf(T item){
-		int counter = -1;
+		int counter = 0;
 		for(int i=0; i<size; i++){
 			if(itemAt(i).equals(item))
 				counter++;
 		}
+		if(counter==0)
+			return -1;
 		return counter;
     }
 

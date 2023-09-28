@@ -68,8 +68,11 @@
 	public ReallyLongInt add(ReallyLongInt rightOp) {
 		// int maxSize = Math.max(rightOp.size(), this.size());
 		// ReallyLongInt temp = new ReallyLongInt(maxSize); 
-
-		// if(rightOp.size)
+		// int minSize = Math.min(rightOp.size(), this.size());
+		// for(int i=0; i<maxSize-minSize; i++){
+		// 	//mi
+		// }
+		
 		
 
 		// int remainder = 0;
@@ -116,7 +119,11 @@
 
 	// add zeros o the end
 	public ReallyLongInt multTenToThe(int num){
-		return null;
+		ReallyLongInt temp = new ReallyLongInt(this.size());
+		for(int i=0; i<num; i++){
+			append(0);
+		}
+		return temp;
 	}
 
 	// divide
