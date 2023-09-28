@@ -66,12 +66,12 @@
 	// if remainder at end, append again
 
 	public ReallyLongInt add(ReallyLongInt rightOp) {
-		// int maxSize = Math.max(rightOp.size(), this.size());
-		// ReallyLongInt temp = new ReallyLongInt(maxSize); 
-		// int minSize = Math.min(rightOp.size(), this.size());
-		// for(int i=0; i<maxSize-minSize; i++){
-		// 	//mi
-		// }
+		int maxSize = Math.max(rightOp.size(), this.size());
+		ReallyLongInt temp = new ReallyLongInt(maxSize); 
+		int minSize = Math.min(rightOp.size(), this.size());
+		for(int i=0; i<maxSize-minSize; i++){
+			
+		}
 		
 		
 
@@ -109,32 +109,55 @@
 	}
 // for loop to go through each item --> check individual sequeunce and when one is greater than the other boolean becomes false
 	public int compareTo(ReallyLongInt rOp){
-
+		if(size()>rOp.size())
+			return 1;
+		else if(size()<rOp.size())
+			return -1;
+		else if(size()==rOp.size()){
+			for(int i=0; i<size(); i++){
+				if(itemAt(i)>rOp.itemAt(i))
+					return 1;
+				else if(itemAt(i)<rOp.itemAt(i))
+					return -1;
+			}
+		}
 		return 0;
 	}
 
 	public boolean equals(Object rightOp){
+		if(this.compareTo((ReallyLongInt)rightOp)==0)
+			return true;
 		return false;
 	}
 
 	// add zeros o the end
 	public ReallyLongInt multTenToThe(int num){
 		ReallyLongInt temp = new ReallyLongInt(this.size());
+		temp = this;
 		for(int i=0; i<num; i++){
-			append(0);
+			temp.append(0);
 		}
 		return temp;
 	}
 
 	// divide
 	public ReallyLongInt divTenToThe(int num){
-		return null;
+		ReallyLongInt temp = new ReallyLongInt(this.size());
+		temp = this;
+		for(int i=0; i<num; i++){
+			temp.deleteTail();
+		}
+		return temp;
 	}
 
 	/** Remove leading zeros.
 	 *
 	 */
 	private void removeZeros() 	{
-
+		int i = 0;
+		while(i<size() && itemAt(i)!=0){
+			deleteHead();
+			i++;
+		}
 	}
 }
