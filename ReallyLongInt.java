@@ -1,9 +1,9 @@
-/** A partial implementation of the ReallyLongInt class.
- * @author Sherif Khattab (Adapted from Dr. John Ramirez's Spring 2017 CS 0445 Assignment 2 code)
- * You need to complete the implementation of the remaining methods.  Also, for this class
- *  to work, you must complete the implementation of the ArrayDS class. See additional comments below.
+/** A implementation of the ReallyLongInt class. 
+ * @author Sherif Khattab (Adapted from Dr. John Ramirez's Spring 2017 CS 0445 Assignment 2 code) & Insiah Kizilbash
+ * Contains the functions that can be done with a really long integer from adding to dividing by tens. Utilizes the 
+ * ArrayDS<Integer> to use the ReallyLongInt as a sequence of digits in addition to the Comparable<T> interface.
+ * @version 
  */
-
  public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<ReallyLongInt> 
 {
 	// Instance variables are inherited.  You may not add any new instance variables
@@ -31,7 +31,7 @@
 		char c;
 		Integer digit;
 		// Iterate through the String, getting each character and converting it into
-		// an int.  Then add at the end.  Note that
+		// an int. Then add at the end.  Note that
 		// the append() method (from ArrayDS) adds at the end.
 		for (int i = 0; i < s.length(); i++)
 		{
@@ -56,15 +56,11 @@
 		super(rightOp);
 	}
 
-	// You must implement the methods below. See the descriptions in the
-	// assignment sheet
-	// prefix zeros until its the same size (compare the lengths)
-	// digits sum
-	// remainder = 12-10 = 
-	//this.itemAt(first) + rightOp.itemAt(second) + remainder
-	// append to teh new ReallyLongInt
-	// if remainder at end, append again
-
+	/** Finds the sum between the current ReallyLongObject and the rightOp
+	 *  including adding and then removing zeros to make them the same size.
+	 * @param rightOp
+	 * @return the sum between the current ReallyLongInt object and the rightOp.
+	 */
 	public ReallyLongInt add(ReallyLongInt rightOp) {
 		int maxSize = Math.max(rightOp.size(), this.size());
 		ReallyLongInt answer = new ReallyLongInt(""); 
@@ -73,7 +69,7 @@
 		ReallyLongInt min = rightOp;
 		ReallyLongInt max = this;
 
-		if(rightOp.size()<size()){
+		if(rightOp.size()<size()){ 
 			min = rightOp;
 			max = this;
 		}
@@ -106,7 +102,13 @@
 		return answer;
 	}
 
-	// substracting this for the second parameter (this-rightOp) = this object is being decreased as well
+	
+	/** Subtracting the rightOp from the current ReallyLongObject including (should i use this?)
+	 *  adding and then removing zeros to make them the same size to 
+	 *  subtract correctly.
+	 * @param rightOp The object given to subtract from this.
+	 * @return the difference between the current ReallyLongInt object and the rightOp.
+	 */
 	public ReallyLongInt subtract(ReallyLongInt rightOp){
 		if(compareTo(rightOp)==-1)
 			throw new ArithmeticException("Invalid Difference -- Negative Number");
@@ -118,14 +120,6 @@
 		ReallyLongInt min = rightOp;
 		ReallyLongInt max = this;
 
-		// if(rightOp.size()<size()){
-		// 	min = rightOp;
-		// 	max = this;
-		// }
-		// else if(rightOp.size()>size()){
-		// 	min = this;
-		// 	max = rightOp;
-		// }
 		for(int i=0; i<maxSize-minSize; i++){
 			min.prefix(0);
 		}
@@ -148,11 +142,23 @@
 		return answer;
 	}
 
-	// first-second (should not be changing this) - actually a very good candidate for a static metgid
+	/** Subtracting the second parameter from the first parameter
+	 *  adding and then removing zeros to make them the same size to 
+	 *  subtract correctly. Utilizes the subtract(ReallyLongInt obj).
+	 * @param first An integer given. 
+	 * @param second An integer given to subtract from the first parameter.
+	 * @return the difference between the first and second parameters.
+	 */
 	public ReallyLongInt subtract(ReallyLongInt first, ReallyLongInt second){
 		return first.subtract(second);
 	}
-// for loop to go through each item --> check individual sequeunce and when one is greater than the other boolean becomes false
+
+	/** Compares the given paramter with the current ReallyLongInt and then
+	 * based on whether the paramter is less than (1), equal to (0), or 
+	 * greater than (-1) the current object, a integer is returned.
+	 * @param rOp Given ReallyLongInt object to be compared.
+	 * @return an integer (-1, 0, 1) based on the comparison.
+	 */
 	public int compareTo(ReallyLongInt rOp){
 		if(size()>rOp.size())
 			return 1;
@@ -169,13 +175,23 @@
 		return 0;
 	}
 
+	/** Determines whether the current ReallyLongInt is equal to the given 
+	 *  parameter object.
+	 * @param rightOp The object given to compare to the current ReallyLongInt.
+	 * @return Whether the values of the integers are equal or not.
+	*/
 	public boolean equals(Object rightOp){
 		if(this.compareTo((ReallyLongInt)rightOp)==0)
 			return true;
 		return false;
 	}
 
-	// add zeros o the end
+	/** Multiplies the current ReallyLongInt to 10 to the power of the number which 
+	 * is the given parameter.
+	 * @param num The power to 10 that is desired.
+	 * @return A new ReallyLongInt which is the current ReallyLongInt
+	 * multiplied by 10 to the power of the given parameter num.
+	 */
 	public ReallyLongInt multTenToThe(int num){
 		ReallyLongInt temp = new ReallyLongInt(this.size());
 		temp = this;
@@ -185,7 +201,12 @@
 		return temp;
 	}
 
-	// divide
+	/** Divides the current ReallyLongInt by 10 to the power of the number which 
+	 * is the given parameter.
+	 * @param num The power to 10 that is desired.
+	 * @return A new ReallyLongInt which is the current ReallyLongInt
+	 * divided by 10 to the power of the given parameter num.
+	 */
 	public ReallyLongInt divTenToThe(int num){
 		ReallyLongInt temp = new ReallyLongInt(this.size());
 		temp = this;
@@ -195,8 +216,8 @@
 		return temp;
 	}
 
-	/** Remove leading zeros.
-	 *
+	/** Removes the leading zeros in the current ReallyLongInt object. 
+	 * Utilizes the deleteHead() which is located in the parent ArrayDS class.
 	 */
 	private void removeZeros() 	{
 		int i = 0;

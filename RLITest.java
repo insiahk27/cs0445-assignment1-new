@@ -29,7 +29,7 @@ public class RLITest {
 		System.out.println(R2 + " + " + R1 + " = " + R4);
 		System.out.println();
 
-	// 	// Testing subtract method
+		// Testing subtract method
 		R1 = new ReallyLongInt("23456");
 		R2 = new ReallyLongInt("4567");
 		R3 = R1.subtract(R2);
@@ -101,7 +101,7 @@ public class RLITest {
 			System.out.println(R1 + " does not equal " + R3);
 		System.out.println();
 
-	// 	// Testing shift operations
+		// Testing shift operations
 		R1 = new ReallyLongInt("1234567");
 		System.out.println(R1);
 		R1 = R1.multTenToThe(6);

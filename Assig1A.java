@@ -13,7 +13,7 @@
  *  give any differences.
  */
 public class Assig1A
-{ //ArrayDS implements boht the interfaces --> copy and paste all the methods for the interfaces 
+{ 
 	private static final int SIZE = 5;
 	private static final int SIZE2 = 10;
 	private static final int LARGE_SIZE = 100000;
