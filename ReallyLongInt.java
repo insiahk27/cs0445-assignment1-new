@@ -56,7 +56,7 @@
 		super(rightOp);
 	}
 
-	// You must implement the methods below.  See the descriptions in the
+	// You must implement the methods below. See the descriptions in the
 	// assignment sheet
 	// prefix zeros until its the same size (compare the lengths)
 	// digits sum
@@ -67,45 +67,90 @@
 
 	public ReallyLongInt add(ReallyLongInt rightOp) {
 		int maxSize = Math.max(rightOp.size(), this.size());
-		ReallyLongInt temp = new ReallyLongInt(maxSize); 
+		ReallyLongInt answer = new ReallyLongInt(""); 
+
 		int minSize = Math.min(rightOp.size(), this.size());
+		ReallyLongInt min = rightOp;
+		ReallyLongInt max = this;
+
+		if(rightOp.size()<size()){
+			min = rightOp;
+			max = this;
+		}
+		else if(rightOp.size()>size()){
+			min = this;
+			max = rightOp;
+		}
 		for(int i=0; i<maxSize-minSize; i++){
-			
+			min.prefix(0);
 		}
 		
-		
+		int remainder = 0;
+		for(int i=maxSize-1; i>=0; i--){
+			int ans = max.itemAt(i) + min.itemAt(i) + remainder;
+			if(ans >= 10){
+				remainder = 1;
+				ans -= 10;
+			}
+			else {
+				remainder = 0;
+			}
+			answer.append(ans);
+		}
+		if(remainder==1)
+			answer.append(1);
 
-		// int remainder = 0;
-		// int digitSums = 0;
-		// // if()
-		// int remainder = 0;
-		// int digitSums = 0;
-		// for(int i=rightOp.size()-1; i>=0; i--){
-		// 	remainder = 0;
-		// 	if(this.itemAt(i) + rightOp.itemAt(i)>=10){
-		// 		remainder = 1;
-		// 		temp.append(this.itemAt(i) + rightOp.itemAt(i) - 10);
-		// 	}
-		// 	else {
-		// 		temp.append(this.itemAt(i) + rightOp.itemAt(i) + remainder);
-		// 		remainder = 0;
-		// 	}
-		// }
-		// if(remainder==1)
-		// 	temp.append(1);
-		// reverse();
-		// return temp;
-		return null;
+		answer.reverse();
+		min.removeZeros();
+
+		return answer;
 	}
 
 	// substracting this for the second parameter (this-rightOp) = this object is being decreased as well
 	public ReallyLongInt subtract(ReallyLongInt rightOp){
-		return null;
+		if(compareTo(rightOp)==-1)
+			throw new ArithmeticException("Invalid Difference -- Negative Number");
+
+		int maxSize = Math.max(rightOp.size(), this.size());
+		ReallyLongInt answer = new ReallyLongInt(""); 
+
+		int minSize = Math.min(rightOp.size(), this.size());
+		ReallyLongInt min = rightOp;
+		ReallyLongInt max = this;
+
+		// if(rightOp.size()<size()){
+		// 	min = rightOp;
+		// 	max = this;
+		// }
+		// else if(rightOp.size()>size()){
+		// 	min = this;
+		// 	max = rightOp;
+		// }
+		for(int i=0; i<maxSize-minSize; i++){
+			min.prefix(0);
+		}
+
+		int carry = 0;
+		for(int i=maxSize-1; i>=0; i--){
+			int first = max.itemAt(i) + carry;
+			int second = min.itemAt(i);
+			if(first<second){
+				first += 10;
+				carry = -1;
+			}
+			int ans = first - second;
+			answer.append(ans);
+		}
+
+		answer.reverse();
+		min.removeZeros();
+		answer.removeZeros();
+		return answer;
 	}
 
 	// first-second (should not be changing this) - actually a very good candidate for a static metgid
 	public ReallyLongInt subtract(ReallyLongInt first, ReallyLongInt second){
-		return null;
+		return first.subtract(second);
 	}
 // for loop to go through each item --> check individual sequeunce and when one is greater than the other boolean becomes false
 	public int compareTo(ReallyLongInt rOp){
@@ -155,9 +200,8 @@
 	 */
 	private void removeZeros() 	{
 		int i = 0;
-		while(i<size() && itemAt(i)!=0){
+		while(i<size() && itemAt(i)==0 && size()>1){
 			deleteHead();
-			i++;
 		}
 	}
 }

@@ -19,51 +19,51 @@ public class RLITest {
 		System.out.println();
 		 
 		// Testing add method
-		// ReallyLongInt R3 = R1.add(R2);
-		// System.out.println(R1 + " + " + R2 + " = " + R3);
-		// R1 = new ReallyLongInt("1");
-		// R2 = new ReallyLongInt("999999999999999");
-		// R3 = R1.add(R2);
-		// ReallyLongInt R4 = R2.add(R1);
-		// System.out.println(R1 + " + " + R2 + " = " + R3);
-		// System.out.println(R2 + " + " + R1 + " = " + R4);
-		// System.out.println();
+	 	ReallyLongInt R3 = R1.add(R2);
+		System.out.println(R1 + " + " + R2 + " = " + R3);
+		R1 = new ReallyLongInt("1");
+		R2 = new ReallyLongInt("999999999999999");
+		R3 = R1.add(R2);
+		ReallyLongInt R4 = R2.add(R1);
+		System.out.println(R1 + " + " + R2 + " = " + R3);
+		System.out.println(R2 + " + " + R1 + " = " + R4);
+		System.out.println();
 
 	// 	// Testing subtract method
-	// 	R1 = new ReallyLongInt("23456");
-	// 	R2 = new ReallyLongInt("4567");
-	// 	R3 = R1.subtract(R2);
-	// 	System.out.println(R1 + " - " + R2 + " = " + R3);
-	// 	R1 = new ReallyLongInt("1000000");
-	// 	R2 = new ReallyLongInt("1");
-	// 	R3 = R1.subtract(R2);
-	// 	System.out.println(R1 + " - " + R2 + " = " + R3);
-	// 	R1 = new ReallyLongInt("123456");
-	// 	R2 = new ReallyLongInt("123455");
-	// 	R3 = R1.subtract(R2);
-	// 	System.out.println(R1 + " - " + R2 + " = " + R3);
+		R1 = new ReallyLongInt("23456");
+		R2 = new ReallyLongInt("4567");
+		R3 = R1.subtract(R2);
+		System.out.println(R1 + " - " + R2 + " = " + R3);
+		R1 = new ReallyLongInt("1000000");
+		R2 = new ReallyLongInt("1");
+		R3 = R1.subtract(R2);
+		System.out.println(R1 + " - " + R2 + " = " + R3);
+		R1 = new ReallyLongInt("123456");
+		R2 = new ReallyLongInt("123455");
+		R3 = R1.subtract(R2);
+		System.out.println(R1 + " - " + R2 + " = " + R3);
 
-	// 	R1 = new ReallyLongInt("123456");
-	// 	R2 = new ReallyLongInt("123456");
-	// 	R3 = R1.subtract(R2);
-	// 	System.out.println(R1 + " - " + R2 + " = " + R3);
+		R1 = new ReallyLongInt("123456");
+		R2 = new ReallyLongInt("123456");
+		R3 = R1.subtract(R2);
+		System.out.println(R1 + " - " + R2 + " = " + R3);
 
-	// 	R1 = new ReallyLongInt("1000");
-	// 	R2 = new ReallyLongInt("1001");
-	// 	try
-	// 	{
-	// 		R3 = R1.subtract(R2);
-	// 	}
-	// 	catch (ArithmeticException e)
-	// 	{
-	// 		System.out.println(e);
-	// 	}
-	// 	System.out.println();
+		R1 = new ReallyLongInt("1000");
+		R2 = new ReallyLongInt("1001");
+		try
+		{
+			R3 = R1.subtract(R2);
+		}
+		catch (ArithmeticException e)
+		{
+			System.out.println(e);
+		}
+		System.out.println();
 
-	// 	// Testing copy constructor
-	// 	ReallyLongInt R5 = new ReallyLongInt(R4);
-	// 	System.out.println("Copy of " + R4.toString() + " = " + R5.toString());
-	// 	System.out.println();
+		// Testing copy constructor
+		ReallyLongInt R5 = new ReallyLongInt(R4);
+		System.out.println("Copy of " + R4.toString() + " = " + R5.toString());
+		System.out.println();
 
 		// Testing compareTo
 		ReallyLongInt [] C = new ReallyLongInt[4];
@@ -94,7 +94,7 @@ public class RLITest {
 		// Testing equals
 		R1 = new ReallyLongInt("12345678987654321");
 		R2 = new ReallyLongInt("12345678987654321");
-		ReallyLongInt R3 = new ReallyLongInt("12345678907654321");
+		R3 = new ReallyLongInt("12345678907654321");
 		if (R1.equals(R2))
 			System.out.println(R1 + " equals " + R2);
 		if (!R1.equals(R3))
