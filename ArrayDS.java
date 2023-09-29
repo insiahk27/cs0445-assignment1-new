@@ -172,6 +172,8 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 				for(int j=0; j<another.size(); j++){
 					if(itemAt(i+j).equals(another.itemAt(j)))
 						counter++;
+					else
+						break;
 				}
 			}
 		}
