@@ -2,7 +2,7 @@
  * @author Sherif Khattab (Adapted from Dr. John Ramirez's Spring 2017 CS 0445 Assignment 2 code) & Insiah Kizilbash
  * Contains the functions that can be done with a really long integer from adding to dividing by tens. Utilizes the 
  * ArrayDS<Integer> to use the ReallyLongInt as a sequence of digits in addition to the Comparable<T> interface.
- * @version 
+ * @version JDK 17.0.8
  */
  public class ReallyLongInt extends ArrayDS<Integer> implements Comparable<ReallyLongInt> 
 {
@@ -77,10 +77,15 @@
 			min = this;
 			max = rightOp;
 		}
+
+		// Adds zero to the beginning of the smaller sized integer
 		for(int i=0; i<maxSize-minSize; i++){
 			min.prefix(0);
 		}
 		
+		/** Loops through each column of digits in the sequence and then 
+		 * add them up in addition to the remainder. The remainder is updated throughout.
+		 */
 		int remainder = 0;
 		for(int i=maxSize-1; i>=0; i--){
 			int ans = max.itemAt(i) + min.itemAt(i) + remainder;
@@ -120,10 +125,15 @@
 		ReallyLongInt min = rightOp;
 		ReallyLongInt max = this;
 
+		// Adds zero to the beginning of the smaller sized integer
 		for(int i=0; i<maxSize-minSize; i++){
 			min.prefix(0);
 		}
 
+		/** Loops through each column of digits in the sequence and then 
+		 * subtracts them up. If the top digit is too small, 10 is added to it
+		 * and then there is a carry over digit of 1.
+		 */
 		int carry = 0;
 		for(int i=maxSize-1; i>=0; i--){
 			int first = max.itemAt(i) + carry;
@@ -165,6 +175,7 @@
 		else if(size()<rOp.size())
 			return -1;
 		else if(size()==rOp.size()){
+			// Loops through sequences to compare the two numbers.
 			for(int i=0; i<size(); i++){
 				if(itemAt(i)>rOp.itemAt(i))
 					return 1;
@@ -195,6 +206,7 @@
 	public ReallyLongInt multTenToThe(int num){
 		ReallyLongInt temp = new ReallyLongInt(this.size());
 		temp = this;
+		// Adds zeros to the end of the integer the given power number of times.
 		for(int i=0; i<num; i++){
 			temp.append(0);
 		}
@@ -210,6 +222,8 @@
 	public ReallyLongInt divTenToThe(int num){
 		ReallyLongInt temp = new ReallyLongInt(this.size());
 		temp = this;
+
+		// deletes the ending digit the power given number of times.
 		for(int i=0; i<num; i++){
 			temp.deleteTail();
 		}
@@ -225,4 +239,62 @@
 			deleteHead();
 		}
 	}
+
+	/** Multiplies the current ReallyLongInt to 10 to the power of the number which 
+	 * is the given parameter.
+	 * @param num The power to 10 that is desired.
+	 * @return A new ReallyLongInt which is the current ReallyLongInt
+	 * multiplied by 10 to the power of the given parameter num.
+	 */
+	public ReallyLongInt multiply(ReallyLongInt rightOp){ 
+		int maxSize = Math.max(rightOp.size(), this.size());
+		ReallyLongInt product = new ReallyLongInt("0"); 
+
+		ReallyLongInt min = rightOp;
+		ReallyLongInt max = this;
+
+		if(rightOp.size()<size()){ 
+			min = rightOp;
+			max = this;
+		}
+		else if(rightOp.size()>size()){
+			min = this;
+			max = rightOp;
+		}
+
+		/** Loops through the smaller sequences number of digit times to multiply
+		 * each digit of the smaller sequence.
+		 */
+		for(int i=min.size()-1; i>=0; i--){
+			ReallyLongInt temp = new ReallyLongInt("");
+			int remainder = 0;
+			int count = 0;
+			
+			/** adds zero each time a new product has to be added to the total ending product during
+			 * the multiplication */ 
+			
+			while(count<(min.size()-1)-i){
+				temp.append(0);
+				count++;
+			}
+			
+			/** Loops through until the top size has been multiplied */ 
+			for(int k=maxSize-1; k>=0; k--){
+				int num = min.itemAt(i)*max.itemAt(k) + remainder;
+				if(num>=10){
+					remainder = num/10;
+					num %= 10;
+				}
+				else
+					remainder = 0;
+				temp.prefix(num);
+			}
+			if(remainder!=0)
+				temp.prefix(remainder);
+			product = product.add(temp);
+		}
+		product.removeZeros();
+		return product;
+	}
+
 }

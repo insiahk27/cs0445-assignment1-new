@@ -40,7 +40,7 @@ public class Assig1A
  		int sz = s1.size();
 		System.out.println(sz + " item(s) in the sequence.");
 
-// 		// Testing prefix
+		// Testing prefix
  		for (int i = 0; i < SIZE; i++)
  		{
  			Integer newItem = 2 * i;
@@ -88,7 +88,7 @@ public class Assig1A
 			System.out.println("Nothing in the sequence");
 		}
 
-// 		// Testing array management
+		// Testing array management
 		String[] alphabet = new String[SIZE2];
 		for(int i=0; i<SIZE2; i++){
 			alphabet[i] = new String("Item " + i);

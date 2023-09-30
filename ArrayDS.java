@@ -3,11 +3,11 @@
  * Contains the functions for the the 2D array as well as the sequence such adding and removing elements
  * from the array and changing the sequence around as well. It also utilizes the SequenceInterface<T> and 
  * ReorderInterface to work with the sequence.
- * @version  
+ * @version  JDK 17.0.8
  */
 public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     
-    private BagInterface<Integer>[][] array; //the underlying 2-D array (DO WE NEED THE FINAL)
+    private BagInterface<Integer>[][] array; //the underlying 2-D array 
     private int size; //the number of items in the sequence
     private T[] alphabet; //the possible item values (e.g., the decimal digits)
     private T firstItem; //the first item in the sequence
@@ -27,10 +27,11 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	}
 
 	/** Creates an empty 2D array having given an intial sequence. 
+	 *  Uses a loop to copy everything in the other parameter into the array.
 	 * 
 	 * @param other The desired sequence.
 	 */
-	public ArrayDS(ArrayDS<T> other){ //DONE
+	public ArrayDS(ArrayDS<T> other){ 
 		this.alphabet = other.alphabet;
 		size = 0;
 		@SuppressWarnings("unchecked")
@@ -42,6 +43,11 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	}
 
     /** Add a new Object to the logical end of the SequenceInterface<T>. 
+	 * Checks to see whether there is anything in the sequence or not. 
+	 * If there is something in the seqeunce, then go to position in 2D
+	 * array based on the lastItem in the sequence and the item given
+	 * and then adds to a bag if it already exists or creates a new bag 
+	 * if there is nothing in that spot.
 	 * @param item the item to be added.
 	 */
 	public void append(T item){
@@ -63,6 +69,8 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	
 
 	/** Creates a string which contains all the items in the sequence.
+	 * Loops through the sequence and adds each item to a string using
+	 * itemAt(position).
 	 * @return a string containing the sequence.
 	 */
 	@Override
@@ -74,7 +82,9 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 		return str;
 	}
 
-	/** Add a new Object to the logical start of the SequenceInterface<T>
+	/** Add a new Object to the logical start of the SequenceInterface<T>.
+	 * Creates a temporary array and adds the item first and then loops through
+	 * the sequence to add all the other items after the item using append().
 	 * @param item the item to be added.
 	 */
 	public void prefix(T item){
@@ -90,6 +100,9 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Delete the item at the logical start of the SequenceInterface<T>.
+	 * Creates a temporary array which then appends all the items of the 
+	 * sequence except the original first item and then everything is copied
+	 * into the original 2D array.
 	 * @return the deleted item
 	 * @throws EmptySequenceException if the sequence is empty
 	 */
@@ -110,7 +123,10 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 		return original;
     }
 
-	/** Delete the item at the logical end of the SequenceInterface<T>
+	/** Delete the item at the logical end of the SequenceInterface<T>.
+	 * Creates a temporary array which then appends all the items of the 
+	 * sequence except the original last item and then everything is copied
+	 * into the original 2D array.
 	 * @return the deleted item
 	 * @throws EmptySequenceException if the sequence is empty
 	 */
@@ -163,6 +179,10 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Checks if a given sequence is a subsequence of this sequence.
+	 * Loops through the sequence and if the item is the same as the subsequence's
+	 * first item, then you loop through the subsequence and compare the two 
+	 * sequences. There is a counter to track if the subsequence exists within the 
+	 * sequence.
 	 * @param another the sequence to check
 	 * @return true if another is a subsequence of this sequence or false otherwise
 	 */ 
@@ -171,6 +191,10 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 		for(int i=0; i<size; i++){
 			if(itemAt(i).equals(another.first())){
 				for(int j=0; j<another.size(); j++){
+					/** When comparing the sequence, since we can't start at the first index again, 
+					 * we have to add j or the subsequences index to the sequence index to make sure
+					 * the sequence is being comparec correctly. 
+					 */
 					if(itemAt(i+j).equals(another.itemAt(j)))
 						counter++;
 					else
@@ -198,6 +222,8 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Return the number of occurences in the sequence of a given item.
+	 * Loops through the sequence and if it is the given item, a counter is 
+	 * increased to keep track of the number of occurances.
 	 * @param item an item
 	 * @return the number of occurences in the sequence of item
 	 */
@@ -213,7 +239,7 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Reset the SequenceInterface to empty status by reinitializing the variables.
-	 *  appropriately.
+	 *  appropriately. Loops through the 2D array and clears out all the bags.
 	 */ 
 	public void clear(){
 		size = 0;
@@ -240,6 +266,9 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 		else if(position==0)
 			result = firstItem;
 		else{
+			/** loops through the 2D array and when the bag is not empty and contains the
+			 * position, then the row item of that position is set to return.
+			*/
 			for(int row=0; row<alphabet.length; row++){
 				for(int col=0; col<alphabet.length; col++){
 					if(array[row][col]!=null && array[row][col].contains(position+1)){
@@ -252,8 +281,10 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }	
 
 	/** Return an array containing the items in the sequence in their logical order.
+	 * Loops through the sequence and puts all the items of the sequence in a temporary
+	 * array which is later returned.
 	 * @return the an array containing the items in the sequence in their logical order
-	 *         or null if the sequence is empty
+	 * or null if the sequence is empty
 	 */
 	public T[] toArray(){
 		T[] temp = null;
@@ -266,9 +297,10 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Return the logical position in the sequence of the first occurrence of a given item.
+	 * Loops through the logical positions in the sequence to see where the item is first found.  
 	 * @param item an item
 	 * @return the logical position in the sequence of the first occurrence of item
-	 *         or -1 if the item doesn't exist
+	 * or -1 if the item doesn't exist.
 	 */ 
 	public int firstOccurrenceOf(T item){
 		for(int i=0; i<alphabet.length; i++){
@@ -278,10 +310,11 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 		return -1;
     }
 
-	/** Return the index of a given item in the alphabet of the sequence.
+	/** Return the index of a given item in the alphabet of the sequence. Loops through
+	 * the alphabet array to check to see if the item exists within the possible given item values.
 	 * @param item an item
 	 * @return the index of item in the alphabet of the sequence
-	 *         or -1 if the item doesn't exist
+	 * or -1 if the item doesn't exist.
 	 */
 	public int indexInAlphabet(T item){
 		int result = -1;
@@ -298,8 +331,7 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	 * @param item an item
 	 * @param position item's position
 	 * @return the index in the alphabet of the item after the occurrence of item
-	 *         at position
-	 *         or -1 if the next item doesn't exist
+	 * at position or -1 if the next item doesn't exist.
 	 */
 	public int nextIndex(T item, int position){
 		if(position+1<alphabet.length)
@@ -312,8 +344,7 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
 	 * @param item an item
 	 * @param position item's position
 	 * @return the index in the alphabet of the item before the occurrence of item
-	 *         at position
-	 *         or -1 if the previous item doesn't exist
+	 * at position or -1 if the previous item doesn't exist.
 	 */
 	public int prevIndex(T item, int position){
 		if(position-1>0)
@@ -322,8 +353,9 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
     /** Logically reverse the data in the ReorderInterface object so that the item
-	 * that was logically first will now be logically last and vice.
-	 * versa. 
+	 * that was logically first will now be logically last and vice versa. Loops
+	 * through the sequence backwards and appends each item to a new temporary 
+	 * array which is then copied into the current (this) object.
 	 */
 	public void reverse(){
 		ArrayDS<T> temp = new ArrayDS<>(alphabet);
@@ -344,7 +376,7 @@ public class ArrayDS<T> implements SequenceInterface<T>, ReorderInterface {
     }
 
 	/** Remove the logically first item and put it at the
-	 * end.
+	 * 	end.
 	 */
 	public void rotateLeft(){
         T temp = firstItem;

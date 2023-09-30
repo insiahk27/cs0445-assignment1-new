@@ -11,7 +11,7 @@ Assignment #: 1
 
 Source code (.java) file name(s):
 
-ArrayDS.java, ReallyLongInt.java, InfoSheet.md
+ArrayDS.java, ReallyLongInt.java, RLITest2.java, InfoSheet.md
 
 Does your program compile without errors?: Yes
 
@@ -27,7 +27,11 @@ program run correctly?:
 There are no errors.
 
 Additional comments (including problems and extra credit):
+
 For specifically the subsequence(), when I run the code on 
 my terminal, the output is exactly the same as the output given 
 on the A1Out.txt but when I turn it in on gradescope, it gives me 
 the error that it didn't pass one of the tests.
+I also completed the extra credit of creating a multiply() in the 
+ReallyLongInt.java class and creating a driver program for testing
+the method.
